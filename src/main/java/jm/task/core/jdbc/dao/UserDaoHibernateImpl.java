@@ -7,7 +7,6 @@ import org.hibernate.Transaction;
 import org.hibernate.Session;
 
 import javax.persistence.Query;
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoHibernateImpl implements UserDao {
@@ -67,7 +66,8 @@ public class UserDaoHibernateImpl implements UserDao {
 
         try (Session session = Util.getNewSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.save(new User(name, lastName, age));
+            User user = new User(name, lastName, age);
+            session.save(user);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) { transaction.rollback(); }
@@ -92,8 +92,8 @@ public class UserDaoHibernateImpl implements UserDao {
     @Override
     public List<User> getAllUsers() {
         try (Session session = Util.getNewSessionFactory().openSession()) {
-            List<User> users = new ArrayList<>();
-            return users = session.createCriteria(User.class).list();
+            List<User> users = session.createQuery("FROM User").list();
+            return users;
         }
     }
 
@@ -102,7 +102,7 @@ public class UserDaoHibernateImpl implements UserDao {
         Transaction transaction = null;
         try (Session session = Util.getNewSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.clear();
+            session.createSQLQuery("TRUNCATE TABLE users").executeUpdate();
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) { transaction.rollback(); }

@@ -3,6 +3,7 @@ package jm.task.core.jdbc.model;
 import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
 @Table(name = "users")
 public class User {
     @Id
@@ -10,13 +11,13 @@ public class User {
     @Column(name = "id")
     private Long id;
 
-    @Column
+    @Column(name = "name")
     private String name;
 
-    @Column
+    @Column(name = "lastName")
     private String lastName;
 
-    @Column
+    @Column(name = "age")
     private Byte age;
 
     public User() {

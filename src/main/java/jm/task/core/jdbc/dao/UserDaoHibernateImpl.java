@@ -7,6 +7,7 @@ import org.hibernate.Transaction;
 import org.hibernate.Session;
 
 import javax.persistence.Query;
+import java.sql.SQLException;
 import java.util.List;
 
 public class UserDaoHibernateImpl implements UserDao {
@@ -94,7 +95,10 @@ public class UserDaoHibernateImpl implements UserDao {
         try (Session session = Util.getNewSessionFactory().openSession()) {
             List<User> users = session.createQuery("FROM User").list();
             return users;
+        } catch (Exception e) {
+            e.getStackTrace();
         }
+        return null;
     }
 
     @Override

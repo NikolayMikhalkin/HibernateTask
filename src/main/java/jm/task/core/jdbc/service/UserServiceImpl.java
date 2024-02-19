@@ -5,6 +5,7 @@ import jm.task.core.jdbc.dao.UserDaoHibernateImpl;
 import jm.task.core.jdbc.model.User;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
@@ -14,32 +15,57 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void createUsersTable() throws SQLException {
-        userDao.createUsersTable();
+    public void createUsersTable() {
+        try {
+            userDao.createUsersTable();
+        } catch (SQLException e) {
+            e.getStackTrace();
+        }
     }
 
     @Override
-    public void dropUsersTable() throws SQLException {
+    public void dropUsersTable() {
+        try {
         userDao.dropUsersTable();
+        } catch (SQLException e) {
+            e.getStackTrace();
+        }
     }
 
     @Override
-    public void saveUser(String name, String lastName, byte age) throws SQLException {
+    public void saveUser(String name, String lastName, byte age) {
+        try {
         userDao.saveUser(name, lastName, age);
+        } catch (SQLException e) {
+            e.getStackTrace();
+        }
     }
 
     @Override
-    public void removeUserById(long id) throws SQLException {
+    public void removeUserById(long id) {
+        try {
         userDao.removeUserById(id);
+        } catch (SQLException e) {
+            e.getStackTrace();
+        }
     }
 
     @Override
-    public List<User> getAllUsers() throws SQLException {
+    public List<User> getAllUsers() {
+        try {
         return userDao.getAllUsers();
+        } catch (SQLException e) {
+            e.getStackTrace();
+        }
+        return new ArrayList<>();
     }
 
     @Override
-    public void cleanUsersTable() throws SQLException {
+    public void cleanUsersTable() {
+        try {
         userDao.cleanUsersTable();
+        } catch (SQLException e) {
+            e.getStackTrace();
+        }
     }
 }

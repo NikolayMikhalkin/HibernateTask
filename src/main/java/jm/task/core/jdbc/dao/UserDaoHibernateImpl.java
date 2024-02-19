@@ -7,7 +7,7 @@ import org.hibernate.Transaction;
 import org.hibernate.Session;
 
 import javax.persistence.Query;
-import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoHibernateImpl implements UserDao {
@@ -98,7 +98,7 @@ public class UserDaoHibernateImpl implements UserDao {
         } catch (Exception e) {
             e.getStackTrace();
         }
-        return null;
+        return new ArrayList<>();
     }
 
     @Override
